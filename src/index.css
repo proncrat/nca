@@ -1,0 +1,41 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Blue from the NCA logo */
+  --color-brand: #2068d6;
+
+  /* Carousel: slow zoom on the showing slide, and the dot progress bar */
+  --animate-kenburns: kenburns 7s ease-out forwards;
+  --animate-progress: progress 6s linear forwards;
+
+  @keyframes kenburns {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.08);
+    }
+  }
+
+  @keyframes progress {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
+}
+
+@layer base {
+  body {
+    color: white;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-kenburns,
+  .animate-progress {
+    animation: none;
+  }
+}
