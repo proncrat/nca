@@ -98,7 +98,7 @@ export default function MainHeader() {
             src={asset('/NCALOGOBIG.png')}
             alt=""
             aria-hidden={compact}
-            className={`rounded-xl absolute left-0 top-0 h-22 xl:h-24 w-auto max-w-none origin-top-left bg-badge transition-all duration-300 ease-in-out ${
+            className={`rounded-xl absolute left-0 top-0 h-21 w-auto max-w-none origin-top-left bg-badge transition-all duration-300 ease-in-out ${
               compact
                 ? 'pointer-events-none scale-[0.42] opacity-0'
                 : 'opacity-100'
