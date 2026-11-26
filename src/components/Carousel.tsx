@@ -36,7 +36,7 @@ export default function Carousel() {
   const [paused, setPaused] = useState(false)
 
   const go = useCallback(
-    (i) => setIndex((i + slides.length) % slides.length),
+    (i: number) => setIndex((i + slides.length) % slides.length),
     [],
   )
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router'
-import { initialScrollY } from '../scroll.js'
+import { initialScrollY } from '../scroll'
 
 const navItems = [
   { to: '/', label: 'Home' },
@@ -10,7 +10,9 @@ const navItems = [
 ]
 
 // Contact sits apart at the end as an outlined call-to-action
-const contactClass = ({ isActive }) =>
+type NavState = { isActive: boolean }
+
+const contactClass = ({ isActive }: NavState) =>
   `px-4 py-2 rounded-md border text-xs font-semibold uppercase tracking-[0.15em] transition-colors duration-200 ease-out ${
     isActive
       ? 'border-brand bg-brand text-white'
@@ -38,7 +40,7 @@ export default function MainHeader() {
     }
   }, [])
 
-  const linkClass = ({ isActive }) =>
+  const linkClass = ({ isActive }: NavState) =>
     `px-3 py-2 rounded-md text-xs font-medium uppercase tracking-[0.15em] transition-colors duration-200 ease-out ${
       isActive
         ? 'bg-brand text-white'

@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef } from 'react'
 import { Outlet, useLocation } from 'react-router'
 import MainHeader from './Header'
 import Footer from './Footer'
-import { restoreScroll } from '../scroll.js'
+import { restoreScroll } from '../scroll'
 
 export default function Layout() {
   // Runs before the first paint, so the page appears already scrolled

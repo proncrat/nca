@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 
 const YEAR = new Date().getFullYear()
 
@@ -51,7 +51,9 @@ const contacts = [
   },
 ]
 
-function PartnerLogo({ name, src, href }) {
+type Partner = { name: string; src: string; href: string }
+
+function PartnerLogo({ name, src, href }: Partner) {
   const [failed, setFailed] = useState(false)
 
   return (
@@ -80,7 +82,7 @@ function PartnerLogo({ name, src, href }) {
   )
 }
 
-function Heading({ children }) {
+function Heading({ children }: { children: ReactNode }) {
   return (
     <h2 className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
       {children}
@@ -89,7 +91,7 @@ function Heading({ children }) {
 }
 
 export default function Footer() {
-  const telHref = (phone) => `tel:${phone.replace(/\s/g, '')}`
+  const telHref = (phone: string) => `tel:${phone.replace(/\s/g, '')}`
 
   return (
     <footer className="mt-16 border-t border-gray-800 bg-neutral-950 text-gray-300">

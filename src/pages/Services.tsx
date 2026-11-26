@@ -1,7 +1,9 @@
 import { Link } from 'react-router'
 
 // `to` links an item to its own page where one exists
-const services = [
+type Service = { label: string; to?: string }
+
+const services: Service[] = [
   { label: 'Electrical: Commercial and Industrial', to: '/electrical' },
   { label: 'Plant machinery, Fault finding, repair and maintenance' },
   { label: 'Machine Safety' },
@@ -17,7 +19,7 @@ const services = [
 const rowClass =
   'group flex items-baseline gap-5 border-b border-gray-800 py-5 transition-colors duration-300'
 
-function Row({ label, to, i }) {
+function Row({ label, to, i }: Service & { i: number }) {
   const inner = (
     <>
       <span className="w-6 shrink-0 font-mono text-xs text-gray-600 transition-colors duration-300 group-hover:text-brand">

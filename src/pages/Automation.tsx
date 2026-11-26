@@ -1,4 +1,14 @@
-const columns = [
+type ColumnProps = {
+  title: string
+  items?: string[]
+  image?: string
+  imageAlt?: string
+  logo?: string
+  href?: string
+  linkText?: string
+}
+
+const columns: ColumnProps[] = [
   {
     title: 'Automation capabilities',
     items: [
@@ -28,7 +38,15 @@ const columns = [
   },
 ]
 
-function Column({ title, items, image, imageAlt, logo, href, linkText }) {
+function Column({
+  title,
+  items,
+  image,
+  imageAlt,
+  logo,
+  href,
+  linkText,
+}: ColumnProps) {
   return (
     <div className="py-8 md:px-6 lg:py-0 lg:first:pl-0 lg:last:pr-0">
       <h3 className="text-sm font-semibold uppercase tracking-[0.15em] text-white">

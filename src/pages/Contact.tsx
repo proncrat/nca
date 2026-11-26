@@ -1,11 +1,19 @@
-import { useState } from 'react'
+import { useState, type FormEvent, type ReactNode } from 'react'
 
 // Where form messages go. The site has no backend, so Submit opens the
 // visitor's email app with the message filled in. Swap handleSubmit for a
 // form service (e.g. Formspree, Web3Forms) to send straight from the page.
 const TO = 'Dave@nca.nz'
 
-const fields = [
+type FieldProps = {
+  name: string
+  label: string
+  type: string
+  autoComplete?: string
+  required?: boolean
+}
+
+const fields: FieldProps[] = [
   { name: 'name', label: 'Your name', type: 'text', autoComplete: 'name', required: true },
   { name: 'email', label: 'Your email', type: 'email', autoComplete: 'email', required: true },
   { name: 'subject', label: 'Subject', type: 'text', required: true },
@@ -17,18 +25,19 @@ const inputClass =
 export default function Contact() {
   const [sent, setSent] = useState(false)
 
-  function handleSubmit(e) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const data = new FormData(e.currentTarget)
+    const get = (key: string) => String(data.get(key) ?? '')
     const body = [
-      data.get('message'),
+      get('message'),
       '',
-      `— ${data.get('name')} (${data.get('email')})`,
+      `— ${get('name')} (${get('email')})`,
     ]
       .join('\n')
       .trim()
     const href = `mailto:${TO}?subject=${encodeURIComponent(
-      data.get('subject'),
+      get('subject'),
     )}&body=${encodeURIComponent(body)}`
     window.location.href = href
     setSent(true)
@@ -109,7 +118,7 @@ export default function Contact() {
   )
 }
 
-function Field({ name, label, type, autoComplete, required }) {
+function Field({ name, label, type, autoComplete, required }: FieldProps) {
   return (
     <div>
       <label htmlFor={name} className="text-sm text-gray-400">
@@ -127,7 +136,7 @@ function Field({ name, label, type, autoComplete, required }) {
   )
 }
 
-function Detail({ label, children }) {
+function Detail({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div>
       <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">

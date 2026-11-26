@@ -1,11 +1,11 @@
 import { createBrowserRouter } from 'react-router'
-import Layout from './components/Layout.jsx'
-import Home from './pages/Home.jsx'
-import Automation from './pages/Automation.jsx'
-import Contact from './pages/Contact.jsx'
-import Electrical from './pages/Electrical.jsx'
-import Services from './pages/Services.jsx'
-import NotFound from './pages/NotFound.jsx'
+import Layout from './components/Layout'
+import Home from './pages/Home'
+import Automation from './pages/Automation'
+import Contact from './pages/Contact'
+import Electrical from './pages/Electrical'
+import Services from './pages/Services'
+import NotFound from './pages/NotFound'
 
 export const router = createBrowserRouter([
   {

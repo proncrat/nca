@@ -1,7 +1,7 @@
-import Carousel from '../components/Carousel.jsx'
-import ServiceAgents from '../components/ServiceAgents.jsx'
-import Services from '../components/Services.jsx'
-import WhyUs from '../components/WhyUs.jsx'
+import Carousel from '../components/Carousel'
+import ServiceAgents from '../components/ServiceAgents'
+import Services from '../components/Services'
+import WhyUs from '../components/WhyUs'
 
 export default function Home() {
   return (
