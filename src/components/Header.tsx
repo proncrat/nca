@@ -72,7 +72,7 @@ export default function MainHeader() {
   }, [])
 
   const linkClass = ({ isActive }: NavState) =>
-    `px-3 py-2 rounded-md text-xs font-medium uppercase tracking-[0.15em] transition-colors duration-200 ease-out ${
+    `px-2.5 py-2 rounded-md text-xs font-medium uppercase tracking-[0.15em] transition-colors duration-200 ease-out ${
       isActive
         ? 'bg-brand text-white'
         : 'text-soft hover:bg-brand/25 hover:text-fg'
@@ -85,21 +85,20 @@ export default function MainHeader() {
       }`}
     >
       <nav className="mx-auto max-w-5xl flex items-center gap-2 px-4 py-2">
-        {/* Fixed-height slot: the logo grows out of it, the header doesn't */}
+        {/* Fixed-size slot: the big logo grows out of it, so neither the
+            header height nor the nav buttons move when it shrinks */}
         <Link
           to="/"
           aria-label="Northland Controls & Automation — home"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className={`relative block h-10 shrink-0 transition-all duration-300 ease-in-out ${
-            compact ? 'w-24' : 'w-84'
-          }`}
+          className="relative block h-10 w-24 shrink-0"
         >
           {/* Wide logo at the top of the page */}
           <img
             src={asset('/NCALOGOBIG.png')}
             alt=""
             aria-hidden={compact}
-            className={`rounded-xl absolute left-0 top-0 h-24 w-auto max-w-none origin-top-left bg-badge transition-all duration-300 ease-in-out ${
+            className={`rounded-xl absolute left-0 top-0 h-22 xl:h-24 w-auto max-w-none origin-top-left bg-badge transition-all duration-300 ease-in-out ${
               compact
                 ? 'pointer-events-none scale-[0.42] opacity-0'
                 : 'opacity-100'
@@ -138,7 +137,7 @@ export default function MainHeader() {
               {item.label}
             </NavLink>
           ))}
-          <span aria-hidden className="mx-2 h-6 w-px bg-line" />
+          <span aria-hidden className="mx-1.5 h-6 w-px bg-line" />
           <NavLink to="/contact" className={contactClass}>
             Contact
           </NavLink>
