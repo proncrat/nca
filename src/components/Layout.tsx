@@ -23,7 +23,7 @@ export default function Layout() {
   return (
     <div className="min-h-screen flex flex-col bg-bg text-fg">
       <MainHeader />
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pt-20 pb-8">
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pt-8 pb-8 lg:pt-20">
         <Outlet />
       </main>
       <Footer />

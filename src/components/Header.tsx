@@ -20,23 +20,45 @@ const contactClass = ({ isActive }: NavState) =>
       : 'border-brand text-fg hover:bg-brand hover:text-white'
   }`
 
+// Desktop = where the full nav shows (Tailwind's `lg`)
+const desktopQuery = window.matchMedia('(min-width: 1024px)')
+
+// Mobile menu rows: full width, left aligned, active page marked in blue
+const mobileLinkClass = ({ isActive }: NavState) =>
+  `flex items-center justify-between border-b border-line py-4 text-sm font-medium uppercase tracking-[0.15em] transition-colors duration-200 ${
+    isActive ? 'text-brand' : 'text-soft hover:text-fg'
+  }`
+
 export default function MainHeader() {
   // Read scroll position up front so a reload mid-page starts small
   const [scrolled, setScrolled] = useState(
     () => Math.max(window.scrollY, initialScrollY) > 40,
   )
+  const [desktop, setDesktop] = useState(desktopQuery.matches)
   const [menuOpen, setMenuOpen] = useState(false)
   // Animations stay off briefly on load, so the browser restoring the
   // scroll position doesn't play the big→small transition
   const [animate, setAnimate] = useState(false)
 
+  // The big logo only ever shows on desktop at the top of the page
+  const compact = scrolled || !desktop
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
+    const onResize = () => {
+      setDesktop(desktopQuery.matches)
+      if (desktopQuery.matches) setMenuOpen(false)
+    }
+    desktopQuery.addEventListener('change', onResize)
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setMenuOpen(false)
+    window.addEventListener('keydown', onKey)
     const t = setTimeout(() => setAnimate(true), 400)
     return () => {
       window.removeEventListener('scroll', onScroll)
+      desktopQuery.removeEventListener('change', onResize)
+      window.removeEventListener('keydown', onKey)
       clearTimeout(t)
     }
   }, [])
@@ -61,16 +83,16 @@ export default function MainHeader() {
           aria-label="Northland Controls & Automation — home"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className={`relative block h-10 shrink-0 transition-all duration-300 ease-in-out ${
-            scrolled ? 'w-24' : 'w-84'
+            compact ? 'w-24' : 'w-84'
           }`}
         >
           {/* Wide logo at the top of the page */}
           <img
             src={asset('/NCALOGOBIG.png')}
             alt=""
-            aria-hidden={scrolled}
+            aria-hidden={compact}
             className={`rounded-xl absolute left-0 top-0 h-24 w-auto max-w-none origin-top-left bg-badge transition-all duration-300 ease-in-out ${
-              scrolled
+              compact
                 ? 'pointer-events-none scale-[0.42] opacity-0'
                 : 'opacity-100'
             }`}
@@ -79,16 +101,16 @@ export default function MainHeader() {
           <img
             src={asset('/NCALOGO.png')}
             alt=""
-            aria-hidden={!scrolled}
+            aria-hidden={!compact}
             className={`absolute left-0 top-0 h-10 w-10 transition-opacity duration-300 ease-in-out ${
-              scrolled ? 'opacity-100' : 'pointer-events-none opacity-0'
+              compact ? 'opacity-100' : 'pointer-events-none opacity-0'
             }`}
           />
           {/* Name beside the small logo, slides in once scrolled */}
           <span
             aria-hidden
             className={`absolute left-12 top-1/2 -translate-y-1/2 text-xl font-bold tracking-wide text-brand transition-all duration-300 ease-in-out ${
-              scrolled
+              compact
                 ? 'translate-x-0 opacity-100'
                 : '-translate-x-2 opacity-0'
             }`}
@@ -121,7 +143,7 @@ export default function MainHeader() {
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          className="ml-auto flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-md transition-colors duration-200 hover:bg-brand/25 lg:hidden"
+          className="ml-auto flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-md outline-none transition-colors duration-200 hover:bg-brand/25 focus-visible:ring-2 focus-visible:ring-brand lg:hidden"
         >
           <span
             className={`h-0.5 w-5 bg-fg transition-transform duration-300 ${
@@ -149,7 +171,10 @@ export default function MainHeader() {
         }`}
       >
         <div className="overflow-hidden">
-          <div className="mx-auto flex max-w-5xl flex-col items-end gap-1 px-4 pb-4 pt-16">
+          <nav
+            aria-label="Main"
+            className="mx-auto flex max-w-5xl flex-col border-t border-line px-4 pb-6"
+          >
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
@@ -157,20 +182,27 @@ export default function MainHeader() {
                 end={item.to === '/'}
                 onClick={() => setMenuOpen(false)}
                 tabIndex={menuOpen ? 0 : -1}
-                className={linkClass}
+                className={mobileLinkClass}
               >
-                {item.label}
+                {({ isActive }) => (
+                  <>
+                    {item.label}
+                    {isActive && (
+                      <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-brand" />
+                    )}
+                  </>
+                )}
               </NavLink>
             ))}
             <NavLink
               to="/contact"
               onClick={() => setMenuOpen(false)}
               tabIndex={menuOpen ? 0 : -1}
-              className={(s) => `mt-2 ${contactClass(s)}`}
+              className="mt-6 rounded-lg bg-brand py-3 text-center text-sm font-semibold uppercase tracking-[0.15em] text-white transition duration-200 hover:brightness-110"
             >
-              Contact
+              Contact us
             </NavLink>
-          </div>
+          </nav>
         </div>
       </div>
     </header>
