@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router'
 import { initialScrollY } from '../scroll'
 import { asset } from '../asset'
+import { SpannerIcon } from './tools/ToolsHeader'
 
 const navItems = [
   { to: '/', label: 'Home' },
@@ -19,6 +20,13 @@ const contactClass = ({ isActive }: NavState) =>
       ? 'border-brand bg-brand text-white'
       : 'border-brand text-fg hover:bg-brand hover:text-white'
   }`
+
+// Link to Thompson Industrial, the tool repair side of the business. Orange
+// to match that site's colours, so it reads as somewhere different.
+const toolsClass =
+  'flex items-center gap-1.5 whitespace-nowrap px-3 py-2 rounded-md bg-[#ea580c] text-xs font-semibold uppercase tracking-[0.15em] text-white transition duration-200 hover:brightness-110'
+
+const ToolsIcon = () => <SpannerIcon className="h-3.5 w-3.5" />
 
 // Desktop = where the full nav shows (Tailwind's `lg`)
 const desktopQuery = window.matchMedia('(min-width: 1024px)')
@@ -134,6 +142,10 @@ export default function MainHeader() {
           <NavLink to="/contact" className={contactClass}>
             Contact
           </NavLink>
+          <Link to="/tools" className={`ml-1 ${toolsClass}`}>
+            <ToolsIcon />
+            Tool repair
+          </Link>
         </div>
 
         {/* Mobile menu toggle */}
@@ -202,6 +214,15 @@ export default function MainHeader() {
             >
               Contact us
             </NavLink>
+            <Link
+              to="/tools"
+              onClick={() => setMenuOpen(false)}
+              tabIndex={menuOpen ? 0 : -1}
+              className={`mt-3 justify-center py-3 text-sm ${toolsClass}`}
+            >
+              <ToolsIcon />
+              Tool repair — Thompson Industrial
+            </Link>
           </nav>
         </div>
       </div>

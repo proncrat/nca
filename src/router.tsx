@@ -5,6 +5,7 @@ import Automation from './pages/Automation'
 import Contact from './pages/Contact'
 import Electrical from './pages/Electrical'
 import Services from './pages/Services'
+import Tools from './pages/Tools'
 import NotFound from './pages/NotFound'
 
 export const router = createBrowserRouter(
@@ -18,6 +19,7 @@ export const router = createBrowserRouter(
         { path: 'contact', element: <Contact /> },
         { path: 'electrical', element: <Electrical /> },
         { path: 'services', element: <Services /> },
+        { path: 'tools', element: <Tools /> },
         { path: '*', element: <NotFound /> },
       ],
     },

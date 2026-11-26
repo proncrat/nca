@@ -75,6 +75,15 @@
   --c-badge: #05070b;
 }
 
+/*
+ * Thompson Industrial (tool repair, under /tools) uses orange instead of
+ * the NCA blue. Every brand utility (bg-brand, text-brand…) inside picks
+ * this up, so shared components switch colour automatically.
+ */
+.tools {
+  --color-brand: #ea580c;
+}
+
 @layer base {
   body {
     background-color: var(--c-bg);
