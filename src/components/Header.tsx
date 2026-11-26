@@ -17,7 +17,7 @@ const contactClass = ({ isActive }: NavState) =>
   `px-4 py-2 rounded-md border text-xs font-semibold uppercase tracking-[0.15em] transition-colors duration-200 ease-out ${
     isActive
       ? 'border-brand bg-brand text-white'
-      : 'border-brand text-white hover:bg-brand'
+      : 'border-brand text-fg hover:bg-brand hover:text-white'
   }`
 
 export default function MainHeader() {
@@ -45,12 +45,12 @@ export default function MainHeader() {
     `px-3 py-2 rounded-md text-xs font-medium uppercase tracking-[0.15em] transition-colors duration-200 ease-out ${
       isActive
         ? 'bg-brand text-white'
-        : 'text-gray-300 hover:bg-brand/25 hover:text-white'
+        : 'text-soft hover:bg-brand/25 hover:text-fg'
     }`
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-gray-200 bg-black text-white ${
+      className={`sticky top-0 z-50 border-b border-line bg-bg text-fg ${
         animate ? '' : '[&_*]:transition-none!'
       }`}
     >
@@ -69,7 +69,7 @@ export default function MainHeader() {
             src={asset('/NCALOGOBIG.png')}
             alt=""
             aria-hidden={scrolled}
-            className={`rounded-xl absolute left-0 top-0 h-24 w-auto max-w-none origin-top-left bg-black transition-all duration-300 ease-in-out ${
+            className={`rounded-xl absolute left-0 top-0 h-24 w-auto max-w-none origin-top-left bg-badge transition-all duration-300 ease-in-out ${
               scrolled
                 ? 'pointer-events-none scale-[0.42] opacity-0'
                 : 'opacity-100'
@@ -108,7 +108,7 @@ export default function MainHeader() {
               {item.label}
             </NavLink>
           ))}
-          <span aria-hidden className="mx-2 h-6 w-px bg-gray-700" />
+          <span aria-hidden className="mx-2 h-6 w-px bg-line" />
           <NavLink to="/contact" className={contactClass}>
             Contact
           </NavLink>
@@ -124,17 +124,17 @@ export default function MainHeader() {
           className="ml-auto flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-md transition-colors duration-200 hover:bg-brand/25 lg:hidden"
         >
           <span
-            className={`h-0.5 w-5 bg-white transition-transform duration-300 ${
+            className={`h-0.5 w-5 bg-fg transition-transform duration-300 ${
               menuOpen ? 'translate-y-2 rotate-45' : ''
             }`}
           />
           <span
-            className={`h-0.5 w-5 bg-white transition-opacity duration-300 ${
+            className={`h-0.5 w-5 bg-fg transition-opacity duration-300 ${
               menuOpen ? 'opacity-0' : ''
             }`}
           />
           <span
-            className={`h-0.5 w-5 bg-white transition-transform duration-300 ${
+            className={`h-0.5 w-5 bg-fg transition-transform duration-300 ${
               menuOpen ? '-translate-y-2 -rotate-45' : ''
             }`}
           />

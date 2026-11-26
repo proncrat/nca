@@ -1,4 +1,5 @@
 import { asset } from '../asset'
+import ThemeToggle from './ThemeToggle'
 import { useState, type ReactNode } from 'react'
 
 const YEAR = new Date().getFullYear()
@@ -19,22 +20,22 @@ const links = [
 const partners = [
   {
     name: 'RDM Approved System Partner',
-    src: asset('/partners/rdm.webp'),
+    src: asset('/partners/rdm-trim.png'),
     href: 'https://www.resourcedm.com/',
   },
   {
     name: 'Weintek',
-    src: asset('/partners/weintek.webp'),
+    src: asset('/partners/weintek-trim.png'),
     href: 'https://www.weintek.com/',
   },
   {
     name: 'CODESYS',
-    src: asset('/partners/codesys.webp'),
+    src: asset('/partners/codesys-trim.png'),
     href: 'https://www.codesys.com/',
   },
   {
     name: 'Danfoss',
-    src: asset('/partners/danfoss.webp'),
+    src: asset('/partners/danfoss-trim.png'),
     href: 'https://www.danfoss.com/',
   },
 ]
@@ -54,8 +55,13 @@ const contacts = [
 
 type Partner = { name: string; src: string; href: string }
 
+// Every logo gets roughly the same area rather than the same height, so
+// long thin logos (Weintek) and compact ones (RDM) look equally weighted.
+const LOGO_AREA = 4800 // px²
+
 function PartnerLogo({ name, src, href }: Partner) {
   const [failed, setFailed] = useState(false)
+  const [height, setHeight] = useState<number>()
 
   return (
     <a
@@ -64,10 +70,10 @@ function PartnerLogo({ name, src, href }: Partner) {
       rel="noopener noreferrer"
       aria-label={name}
       title={name}
-      className="flex h-16 items-center justify-center rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gray-500"
+      className="flex h-16 items-center justify-center rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-muted"
     >
       {failed ? (
-        <span className="text-sm font-semibold uppercase tracking-wider text-gray-400">
+        <span className="text-sm font-semibold uppercase tracking-wider text-muted">
           {name}
         </span>
       ) : (
@@ -76,7 +82,12 @@ function PartnerLogo({ name, src, href }: Partner) {
           alt={name}
           loading="lazy"
           onError={() => setFailed(true)}
-          className="max-h-14 w-auto object-contain transition duration-300 [@media(hover:hover)]:not-hover:opacity-70 [@media(hover:hover)]:not-hover:grayscale"
+          onLoad={(e) => {
+            const { naturalWidth: w, naturalHeight: h } = e.currentTarget
+            setHeight(Math.round(Math.sqrt(LOGO_AREA / (w / h))))
+          }}
+          style={height ? { height } : undefined}
+          className="h-10 w-auto max-w-full object-contain transition duration-300 [@media(hover:hover)]:not-hover:opacity-70 [@media(hover:hover)]:not-hover:grayscale"
         />
       )}
     </a>
@@ -85,7 +96,7 @@ function PartnerLogo({ name, src, href }: Partner) {
 
 function Heading({ children }: { children: ReactNode }) {
   return (
-    <h2 className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
+    <h2 className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-muted">
       {children}
     </h2>
   )
@@ -95,7 +106,7 @@ export default function Footer() {
   const telHref = (phone: string) => `tel:${phone.replace(/\s/g, '')}`
 
   return (
-    <footer className="mt-16 border-t border-gray-800 bg-neutral-950 text-gray-300">
+    <footer className="mt-16 border-t border-line bg-surface text-soft">
       <div className="mx-auto max-w-5xl px-4 py-14">
         <div className="grid gap-12 md:grid-cols-3">
           {/* Get in touch */}
@@ -104,19 +115,19 @@ export default function Footer() {
             <ul className="space-y-6">
               {contacts.map((c) => (
                 <li key={c.name}>
-                  <p className="font-medium text-white">{c.name}</p>
+                  <p className="font-medium text-fg">{c.name}</p>
                   {c.emails.map((email) => (
                     <a
                       key={email}
                       href={`mailto:${email}`}
-                      className="block text-sm text-gray-400 transition hover:text-white"
+                      className="block text-sm text-muted transition hover:text-fg"
                     >
                       {email}
                     </a>
                   ))}
                   <a
                     href={telHref(c.phone)}
-                    className="block text-sm text-gray-400 transition hover:text-white"
+                    className="block text-sm text-muted transition hover:text-fg"
                   >
                     {c.phone}
                   </a>
@@ -133,7 +144,7 @@ export default function Footer() {
                 href="https://maps.google.com/?q=138+Lower+Dent+St,+Whangarei+0110,+New+Zealand"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 transition hover:text-white"
+                className="text-muted transition hover:text-fg"
               >
                 138 Lower Dent St
                 <br />
@@ -154,7 +165,7 @@ export default function Footer() {
                     href={l.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 transition hover:text-white"
+                    className="text-muted transition hover:text-fg"
                   >
                     {l.label}
                   </a>
@@ -165,7 +176,7 @@ export default function Footer() {
         </div>
 
         {/* Partners */}
-        <div className="mt-14 border-t border-gray-800 pt-10">
+        <div className="mt-14 border-t border-line pt-10">
           <div className="grid grid-cols-2 items-center gap-8 md:grid-cols-4">
             {partners.map((p) => (
               <PartnerLogo key={p.name} {...p} />
@@ -175,13 +186,14 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-gray-800">
-        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-4 py-6 text-xs text-gray-500 sm:flex-row">
+      <div className="border-t border-line">
+        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-4 py-6 text-xs text-muted sm:flex-row">
           <p>© 2019–{YEAR} Thompson Electrical Solutions Ltd</p>
+          <ThemeToggle />
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="rounded-full border border-gray-700 px-4 py-1.5 transition hover:border-white hover:text-white"
+            className="rounded-full border border-line px-4 py-1.5 transition hover:border-fg hover:text-fg"
           >
             Back to top ↑
           </button>

@@ -16,7 +16,7 @@ export default function Electrical() {
       <h1 className="text-3xl font-bold">Electrical Services</h1>
 
       {/* Statement */}
-      <blockquote className="mt-10 max-w-4xl border-l-4 border-brand pl-6 text-2xl font-semibold leading-snug tracking-tight text-white md:text-4xl">
+      <blockquote className="mt-10 max-w-4xl border-l-4 border-brand pl-6 text-2xl font-semibold leading-snug tracking-tight text-fg md:text-4xl">
         We strive to provide high quality, compliant electrical work in the
         commercial and industrial sectors.
       </blockquote>
@@ -26,16 +26,16 @@ export default function Electrical() {
         Including
       </h2>
 
-      <ul className="mt-6 grid gap-px overflow-hidden rounded-xl bg-gray-800 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-6 grid gap-px overflow-hidden rounded-xl bg-line sm:grid-cols-2 lg:grid-cols-3">
         {services.map((s, i) => (
           <li
             key={s}
-            className="group flex items-start gap-4 bg-black p-6 transition-colors duration-300 hover:bg-neutral-950"
+            className="group flex items-start gap-4 bg-bg p-6 transition-colors duration-300 hover:bg-surface"
           >
-            <span className="font-mono text-sm text-gray-600 transition-colors duration-300 group-hover:text-brand">
+            <span className="font-mono text-sm text-subtle transition-colors duration-300 group-hover:text-brand">
               {String(i + 1).padStart(2, '0')}
             </span>
-            <span className="text-gray-200 transition-colors duration-300 group-hover:text-white">
+            <span className="text-soft transition-colors duration-300 group-hover:text-fg">
               {s}
             </span>
           </li>

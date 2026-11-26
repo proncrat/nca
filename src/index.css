@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 
+/* `dark:` follows the .dark class on <html>, set by src/theme.ts */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   /* Blue from the NCA logo */
   --color-brand: #2068d6;
@@ -27,9 +30,55 @@
   }
 }
 
+/*
+ * Site colours for light and dark. Use these (bg-bg, text-fg,
+ * border-line…) instead of fixed greys so everything follows the theme.
+ * Greys are cool and slightly blue-tinted to sit with the brand blue.
+ * Text on blue (buttons, active nav) stays text-white in both modes.
+ */
+@theme inline {
+  --color-bg: var(--c-bg); /* page + header background */
+  --color-surface: var(--c-surface); /* footer, inputs, hover fills */
+  --color-fg: var(--c-fg); /* headings, strong text */
+  --color-soft: var(--c-soft); /* body text */
+  --color-muted: var(--c-muted); /* secondary text, captions */
+  --color-subtle: var(--c-subtle); /* numbers, hints, faint marks */
+  --color-line: var(--c-line); /* borders and dividers */
+  --color-plate: var(--c-plate); /* backing for partner logos */
+  --color-badge: var(--c-badge); /* backing for the big header logo */
+}
+
+:root {
+  color-scheme: light;
+  --c-bg: #ffffff;
+  --c-surface: #f3f6fa;
+  --c-fg: #0b1220;
+  --c-soft: #334155;
+  --c-muted: #5b6678;
+  --c-subtle: #a3adbb;
+  --c-line: #e2e8f0;
+  --c-plate: #eef2f6;
+  /* The big logo's lettering is light grey, so it sits on a navy badge */
+  --c-badge: #0b1220;
+}
+
+.dark {
+  color-scheme: dark;
+  --c-bg: #05070b;
+  --c-surface: #0c1118;
+  --c-fg: #f5f7fa;
+  --c-soft: #cbd5e1;
+  --c-muted: #94a3b8;
+  --c-subtle: #475569;
+  --c-line: #1c2533;
+  --c-plate: #c9d3df;
+  --c-badge: #05070b;
+}
+
 @layer base {
   body {
-    color: white;
+    background-color: var(--c-bg);
+    color: var(--c-fg);
   }
 }
 

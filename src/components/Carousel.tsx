@@ -57,7 +57,7 @@ export default function Carousel() {
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
-      className="group relative aspect-4/3 overflow-hidden rounded-xl bg-neutral-950 sm:aspect-21/9"
+      className="group relative aspect-4/3 overflow-hidden rounded-xl bg-surface sm:aspect-21/9"
     >
       {slides.map((s, i) => {
         const active = i === index

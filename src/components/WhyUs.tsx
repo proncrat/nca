@@ -31,7 +31,7 @@ export default function WhyUs() {
   return (
     <section className="mt-24">
       <h2 className="text-2xl font-bold">Why customers use us</h2>
-      <p className="mt-4 max-w-3xl text-lg leading-relaxed text-gray-300">
+      <p className="mt-4 max-w-3xl text-lg leading-relaxed text-soft">
         With many years of experience across both electrical and mechanical
         engineering, we understand how the whole machine works, not just the
         wiring. That means faster fault-finding, practical solutions that fit
@@ -40,12 +40,12 @@ export default function WhyUs() {
 
       {/* Featured pull quote */}
       <figure className="mt-16">
-        <blockquote className="max-w-4xl text-3xl font-semibold leading-tight tracking-tight text-white md:text-5xl">
+        <blockquote className="max-w-4xl text-3xl font-semibold leading-tight tracking-tight text-fg md:text-5xl">
           <span className="text-brand">“</span>
           {featured.text}
           <span className="text-brand">”</span>
         </blockquote>
-        <figcaption className="mt-6 flex items-center gap-3 text-sm text-gray-400">
+        <figcaption className="mt-6 flex items-center gap-3 text-sm text-muted">
           <span aria-hidden className="h-px w-10 bg-brand" />
           {featured.who}
         </figcaption>
@@ -54,11 +54,11 @@ export default function WhyUs() {
       {/* Remaining quotes: plain text with a thin rule, no boxes */}
       <div className="mt-16 grid gap-x-12 gap-y-10 md:grid-cols-2">
         {quotes.map((q) => (
-          <figure key={q.text} className="border-l-2 border-gray-800 pl-5 transition-colors duration-300 hover:border-brand">
-            <blockquote className="leading-relaxed text-gray-300">
+          <figure key={q.text} className="border-l-2 border-line pl-5 transition-colors duration-300 hover:border-brand">
+            <blockquote className="leading-relaxed text-soft">
               “{q.text}”
             </blockquote>
-            <figcaption className="mt-3 text-xs font-semibold uppercase tracking-wider text-gray-500">
+            <figcaption className="mt-3 text-xs font-semibold uppercase tracking-wider text-muted">
               {q.who}
             </figcaption>
           </figure>

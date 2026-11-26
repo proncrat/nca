@@ -50,12 +50,12 @@ function Column({
 }: ColumnProps) {
   return (
     <div className="py-8 md:px-6 lg:py-0 lg:first:pl-0 lg:last:pr-0">
-      <h3 className="text-sm font-semibold uppercase tracking-[0.15em] text-white">
+      <h3 className="text-sm font-semibold uppercase tracking-[0.15em] text-fg">
         {title}
       </h3>
 
       {items && (
-        <ul className="mt-5 space-y-2.5 text-sm text-gray-400">
+        <ul className="mt-5 space-y-2.5 text-sm text-muted">
           {items.map((item) => (
             <li key={item} className="flex gap-3">
               <span
@@ -87,7 +87,7 @@ function Column({
           rel="noopener noreferrer"
           className="group mt-5 block"
         >
-          <span className="flex h-32 items-center justify-center rounded-lg bg-neutral-300 px-3 transition duration-300 group-hover:-translate-y-0.5">
+          <span className="flex h-32 items-center justify-center rounded-lg bg-plate px-3 transition duration-300 group-hover:-translate-y-0.5">
             {/* multiply blends any white baked into the logo into the grey */}
             <img
               src={logo}
@@ -96,7 +96,7 @@ function Column({
               className="h-full w-full object-contain mix-blend-multiply"
             />
           </span>
-          <span className="mt-3 inline-block text-sm font-medium text-brand transition-colors group-hover:text-white">
+          <span className="mt-3 inline-block text-sm font-medium text-brand transition-colors group-hover:text-fg">
             {linkText} ↗
           </span>
         </a>
@@ -114,8 +114,8 @@ export default function Automation() {
         Engineering &amp; Integration Expertise
       </h2>
 
-      <div className="mt-4 max-w-3xl space-y-6 leading-relaxed text-gray-300">
-        <p className="text-xl leading-relaxed text-white">
+      <div className="mt-4 max-w-3xl space-y-6 leading-relaxed text-soft">
+        <p className="text-xl leading-relaxed text-fg">
           Thompson Automation delivers specialized industrial integration across
           Northland, bridging the gap between hardware and high-level control
           logic. Using the CODESYS development environment, we design flexible,
@@ -139,7 +139,7 @@ export default function Automation() {
         </p>
       </div>
 
-      <div className="mt-20 grid divide-y divide-gray-800 border-t border-gray-800 pt-10 md:grid-cols-2 md:divide-y-0 lg:grid-cols-4 lg:divide-x">
+      <div className="mt-20 grid divide-y divide-line border-t border-line pt-10 md:grid-cols-2 md:divide-y-0 lg:grid-cols-4 lg:divide-x">
         {columns.map((c) => (
           <Column key={c.title} {...c} />
         ))}
