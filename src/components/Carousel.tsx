@@ -1,26 +1,27 @@
+import { asset } from '../asset'
 import { useCallback, useEffect, useState } from 'react'
 
 const slides = [
   {
-    src: '/content/CONTROLS-1.jpg',
+    src: asset('/content/CONTROLS-1.jpg'),
     alt: 'Control panel with Eaton easyE4 controllers and SICK safety relays',
     title: 'Automation and controls',
     text: 'PLC and HMI programming, control panels, VFD, pump and motor control.',
   },
   {
-    src: '/content/RDM-BLAST-2-1.png',
+    src: asset('/content/RDM-BLAST-2-1.png'),
     alt: 'Blast freezer monitoring screen showing temperatures and pressures',
     title: 'Remote monitoring',
     text: 'Remote monitoring with alarms to your phone.',
   },
   {
-    src: '/content/20250414_140824-scaled-e1745629188454.jpg',
+    src: asset('/content/20250414_140824-scaled-e1745629188454.jpg'),
     alt: 'Stainless steel food production line with motors and control cabinet',
     title: 'Fault finding and repair',
     text: 'Breakdowns, machinery safety, and control systems that have never worked right.',
   },
   {
-    src: '/content/20210917_154233-1024x768.jpg',
+    src: asset('/content/20210917_154233-1024x768.jpg'),
     alt: 'Row of Danfoss VLT drives installed on a cable tray frame',
     title: 'Danfoss VFDs',
     text: 'Integration of Danfoss VFDs for precision motor control.',

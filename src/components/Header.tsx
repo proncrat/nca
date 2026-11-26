@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router'
 import { initialScrollY } from '../scroll'
+import { asset } from '../asset'
 
 const navItems = [
   { to: '/', label: 'Home' },
@@ -65,7 +66,7 @@ export default function MainHeader() {
         >
           {/* Wide logo at the top of the page */}
           <img
-            src="/NCALOGOBIG.png"
+            src={asset('/NCALOGOBIG.png')}
             alt=""
             aria-hidden={scrolled}
             className={`rounded-xl absolute left-0 top-0 h-24 w-auto max-w-none origin-top-left bg-black transition-all duration-300 ease-in-out ${
@@ -76,7 +77,7 @@ export default function MainHeader() {
           />
           {/* Square logo once scrolled */}
           <img
-            src="/NCALOGO.png"
+            src={asset('/NCALOGO.png')}
             alt=""
             aria-hidden={!scrolled}
             className={`absolute left-0 top-0 h-10 w-10 transition-opacity duration-300 ease-in-out ${

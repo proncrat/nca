@@ -1,3 +1,4 @@
+import { asset } from '../asset'
 type ColumnProps = {
   title: string
   items?: string[]
@@ -26,13 +27,13 @@ const columns: ColumnProps[] = [
   {
     title: 'Weintek – HMI / PLC / Remote IO',
     imageAlt: 'Weintek HMI touchscreen',
-    logo: '/content/weintek-hmi.png',
+    logo: asset('/content/weintek-hmi.png'),
     href: 'https://www.weintek.com/',
     linkText: 'weintek.com',
   },
   {
     title: 'CODESYS programming environment',
-    logo: '/partners/codesys.webp',
+    logo: asset('/partners/codesys.webp'),
     href: 'https://www.codesys.com/',
     linkText: 'codesys.com',
   },

@@ -7,17 +7,22 @@ import Electrical from './pages/Electrical'
 import Services from './pages/Services'
 import NotFound from './pages/NotFound'
 
-export const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Layout />,
-    children: [
-      { index: true, element: <Home /> },
-      { path: 'automation', element: <Automation /> },
-      { path: 'contact', element: <Contact /> },
-      { path: 'electrical', element: <Electrical /> },
-      { path: 'services', element: <Services /> },
-      { path: '*', element: <NotFound /> },
-    ],
-  },
-])
+export const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <Layout />,
+      children: [
+        { index: true, element: <Home /> },
+        { path: 'automation', element: <Automation /> },
+        { path: 'contact', element: <Contact /> },
+        { path: 'electrical', element: <Electrical /> },
+        { path: 'services', element: <Services /> },
+        { path: '*', element: <NotFound /> },
+      ],
+    },
+  ],
+  // Matches Vite's `base` (e.g. /nca on GitHub Pages, / when run locally
+  // without a base), so links and routes work under the sub-folder
+  { basename: import.meta.env.BASE_URL.replace(/\/$/, '') || '/' },
+)

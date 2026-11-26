@@ -1,3 +1,4 @@
+import { asset } from '../asset'
 import { useState, type ReactNode } from 'react'
 
 const YEAR = new Date().getFullYear()
@@ -18,22 +19,22 @@ const links = [
 const partners = [
   {
     name: 'RDM Approved System Partner',
-    src: '/partners/rdm.webp',
+    src: asset('/partners/rdm.webp'),
     href: 'https://www.resourcedm.com/',
   },
   {
     name: 'Weintek',
-    src: '/partners/weintek.webp',
+    src: asset('/partners/weintek.webp'),
     href: 'https://www.weintek.com/',
   },
   {
     name: 'CODESYS',
-    src: '/partners/codesys.webp',
+    src: asset('/partners/codesys.webp'),
     href: 'https://www.codesys.com/',
   },
   {
     name: 'Danfoss',
-    src: '/partners/danfoss.webp',
+    src: asset('/partners/danfoss.webp'),
     href: 'https://www.danfoss.com/',
   },
 ]
